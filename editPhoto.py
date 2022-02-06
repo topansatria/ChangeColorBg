@@ -16,7 +16,7 @@ def editPhoto(img, bgColor):
     )
 
     if ress.status_code == requests.codes.ok:
-        output = 'output/' + str(time.time()) + '.png'
+        output = '/storage/emulated/0/' + str(time.time()) + '.png'
         with open(output, 'wb') as out:
             out.write(ress.content)
             print('Check in :' + output)
