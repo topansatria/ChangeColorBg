@@ -1,4 +1,3 @@
-from cherrypy import url
 import requests
 import time
 from env import APIKEY
