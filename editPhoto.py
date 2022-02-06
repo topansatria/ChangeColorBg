@@ -1,6 +1,12 @@
 import requests
 import time
+import os
 from env import APIKEY
+
+dir = '/storage/emulated/0/removeBg/'
+# dir = 'output/'
+if os.path.exists(dir) == False:
+    os.mkdir(dir)
 
 def editPhoto(img, bgColor):
     ress = requests.post('https://api.remove.bg/v1.0/removebg',
@@ -16,16 +22,29 @@ def editPhoto(img, bgColor):
     )
 
     if ress.status_code == requests.codes.ok:
-        output = '/storage/emulated/0/' + str(time.time()) + '.png'
+        output = dir + str(time.time()) + '.png'
         with open(output, 'wb') as out:
             out.write(ress.content)
-            print('Check in :' + output)
+            print('Monngo, photona di cek didieunya : ' + output)
     else:
         print('Error :', ress.text)
 
+print('==================')
 print('Remove BG @EFFCODE')
+print('==================')
 
-urlPhoto = input(('Asupkeun url photo:'))
-color = input(('Asupkeun warna (blue, red, dll):'))
+while True:
+    urlPhoto = input(('Url photo:'))
+    if urlPhoto == "":
+        print('Asupkeun hela url na cok :(')
+        continue
+    break
+
+while True:
+    color = input(('Warna (blue, red, dll):'))
+    if color == "":
+        print('Asupkeun hela warna na cok :(')
+        continue
+    break
 
 editPhoto(urlPhoto, color)
